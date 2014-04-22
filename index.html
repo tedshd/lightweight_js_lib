@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Examples</title>
+</head>
+<body>
+    <h1>H1</h1>
+    <ul>
+        <li>q</li>
+        <li id="tag">a</li>
+        <li>z</li>
+    </ul>
+    <div>
+        <span class="test">Z</span>
+    </div>
+    <div>
+        <span class="test">X</span>
+    </div>
+    <div>
+        <span class="test">C</span>
+    </div>
+    <a href="">
+        <span class="test">a</span>
+        <span class="test">a</span>
+    </a>
+    <div class="dom">D</div>
+    <div class="dom">O</div>
+    <div class="dom">M</div>
+    <div class="dom">!</div>
+</body>
+<script src="javascript/lightweight_js_lib.js"></script>
+<script>
+    console.log(toHHMMSS(54321));
+    console.log(node('h1'));
+    console.log(node('ul'));
+    console.log(node('ul li'));
+    console.log(node('.test'));
+    console.log(node('div .test'));
+    console.log(indexInParent(node('#tag')));
+    console.log(indexInParent(node('ul')));
+    console.log(indexInParent(node('h1')));
+    var dom = document.querySelectorAll('.dom');
+    // var dom = document.querySelector('h1');
+
+    delElement(dom);
+</script>
+</html>
