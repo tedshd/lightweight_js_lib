@@ -15,7 +15,7 @@ Use in IE8 up
 
 Like jQuery index()
 
-indexInParent(<DOM Element>)
+indexInParent(`<DOM Element>`)
 
 It can find current element index from parent DOM element
 
@@ -23,24 +23,24 @@ It can find current element index from parent DOM element
 
 Delete DOM element
 
-delElement(<DOM Element>)
+delElement(`<DOM Element>`)
 
 ## addClass
 
 Add class to element
 
-addClass(<DOM Element>, <class name>)
+addClass(`<DOM Element>`, `<class name>`)
 
 ## removeClass
 
 remove class to element
 
-removeClass(<DOM Element>, <class name>)
+removeClass(`<DOM Element>`, `<class name>`)
 
 ## toHHMMSS
 
 Number trans to time
 
-toHHMMSS(<Number>)
+toHHMMSS(`<Number>`)
 
 Time format is HH:MM:SS
