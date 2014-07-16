@@ -73,14 +73,6 @@ function toHHMMSS(sec_num) {
     return time;
 }
 
-// get url query String
-function getParameterByName(name) {
-    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-        results = regex.exec(location.search);
-    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-
 // handel cookie
 function setCookie(cname,cvalue,exdays)
 {
@@ -101,3 +93,49 @@ for(var i=0; i<ca.length; i++)
   }
 return "";
 }
+
+// get url query String
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+// check IE & version
+function isIE() {
+    var myNav = navigator.userAgent.toLowerCase();
+    return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
+}
+
+// detect iOS
+var Apple = {};
+Apple.UA = navigator.userAgent;
+Apple.Device = false;
+Apple.Types = ["iPhone", "iPod", "iPad"];
+for (var d = 0; d < Apple.Types.length; d++) {
+    var t = Apple.Types[d];
+    Apple[t] = !!Apple.UA.match(new RegExp(t, "i"));
+    Apple.Device = Apple.Device || Apple[t];
+}
+
+// delegate event
+var div = document.createElement("div"),
+    prefix = ["moz","webkit","ms","o"].filter(function(prefix){
+    return prefix+"MatchesSelector" in div;
+    })[0] + "MatchesSelector";
+
+Element.prototype.addDelegateListener = function(type, selector, fn) {
+    this.addEventListener(type, function(e){
+        var target = e.target;
+
+        while(target && target !== this && !target[prefix](selector)) {
+            target = target.parentNode;
+        }
+
+        if(target && target !== this) {
+            return fn.call( target, e );
+        }
+
+    }, false);
+};
