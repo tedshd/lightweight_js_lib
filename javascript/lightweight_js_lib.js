@@ -60,6 +60,15 @@ function removeClass(dom, className) {
     }
 }
 
+// has class
+function hasClass(dom, className) {
+    if (dom.classList) {
+        return dom.classList.contains(className);
+    } else {
+        // dom.className = dom.className
+    }
+}
+
 // handle time
 function toHHMMSS(sec_num) {
     var hours   = Math.floor(sec_num / 3600),
