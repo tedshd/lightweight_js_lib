@@ -148,3 +148,36 @@ Element.prototype.addDelegateListener = function(type, selector, fn) {
 
     }, false);
 };
+
+// handle trim method
+if (!String.prototype.trim) {
+    (function() {
+        var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+        String.prototype.trim = function() {
+            return this.replace(rtrim, '');
+        };
+    })();
+}
+
+// handle console in IE7-
+(function() {
+    var method,
+        noop = function () {},
+        methods = [
+            'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
+            'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
+            'markTimeline', 'profile', 'profileEnd', 'table', 'time', 'timeEnd',
+            'timeStamp', 'trace', 'warn'
+        ];
+
+    var length = methods.length,
+        console = (window.console = window.console || {});
+    while (length--) {
+        method = methods[length];
+
+        // Only stub undefined methods.
+        if (!console[method]) {
+            console[method] = noop;
+        }
+    }
+}());
