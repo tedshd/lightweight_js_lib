@@ -196,3 +196,16 @@ String.prototype.halfToFull = function () {
     }
     return temp;
 };
+
+function halfToFull(value) {
+　　　　if(value.charCodeAt(i)== 12288){
+　　　　　　result += " ";
+　　　　}else{
+　　　　　　if(value.charCodeAt(i) > 65280 && value.charCodeAt(i) < 65375){
+　　　　　　　　result += String.fromCharCode(value.charCodeAt(i) - 65248);
+　　　　　　}else{
+　　　　　　　　result += String.fromCharCode(value.charCodeAt(i));
+　　　　　　}
+　　　　}
+return result;
+}
