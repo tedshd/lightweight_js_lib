@@ -181,3 +181,18 @@ if (!String.prototype.trim) {
         }
     }
 }());
+
+// 半形轉全形
+String.prototype.halfToFull = function () {
+    var temp = "";
+    for (var i = 0; i < this.toString().length; i++) {
+        var charCode = this.toString().charCodeAt(i);
+        if (charCode <= 126 && charCode >= 33) {
+            charCode += 65248;
+        } else if (charCode == 32) { // 半形空白轉全形
+            charCode = 12288;
+        }
+        temp = temp + String.fromCharCode(charCode);
+    }
+    return temp;
+};
