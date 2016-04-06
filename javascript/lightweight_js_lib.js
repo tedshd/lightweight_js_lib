@@ -65,7 +65,7 @@ function hasClass(dom, className) {
     if (dom.classList) {
         return dom.classList.contains(className);
     } else {
-        // dom.className = dom.className
+        return (dom.className.search(className) === -1)? false: true;
     }
 }
 
