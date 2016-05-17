@@ -83,12 +83,27 @@ function toHHMMSS(sec_num) {
 }
 
 // handel cookie
-function setCookie(cname,cvalue,exdays)
+function setCookie(option)
 {
-    var d = new Date();
-    d.setTime(d.getTime()+(exdays*24*60*60*1000));
-    var expires = "expires="+d.toGMTString();
-    document.cookie = cname+"="+cvalue+"; "+expires;
+    var name = option.name || '',
+        value = option.value || '',
+        exday = option.exday || '',
+        domain = option.domain || '',
+        path = option.path || '',
+        day = '',
+        expires = '';
+    if (exday) {
+        day = new Date();
+        day.setTime(day.getTime() + (exdays*24*60*60*1000));
+        expires = 'expires=' + d.toGMTString() + ';';
+    }
+    if (domain) {
+        domain = 'domain=' + damain + ';';
+    }
+    if (path) {
+        path = 'path=' + path + ';';
+    }
+    document.cookie = name + '=' + value + ';' + domain + path + expires;
 }
 
 function getCookie(cname)
@@ -209,3 +224,52 @@ function halfToFull(value) {
 　　　　}
 return result;
 }
+
+/**
+     * mbStrwidth
+     * @param String
+     * @return int
+     * @see http://php.net/manual/ja/function.mb-strwidth.php
+     */
+    function mbStrwidth(str) {
+        var i=0,l=str.length,c='',length=0;
+        for(;i<l;i++){
+            c=str.charCodeAt(i);
+            if(0x0000<=c&&c<=0x0019){
+                length += 0;
+            }else if(0x0020<=c&&c<=0x1FFF){
+                length += 1;
+            }else if(0x2000<=c&&c<=0xFF60){
+                length += 2;
+            }else if(0xFF61<=c&&c<=0xFF9F){
+                length += 1;
+            }else if(0xFFA0<=c){
+                length += 2;
+            }
+        }
+        return length;
+    }
+
+    /**
+     * mbStrimwidth
+     * @param String
+     * @param int
+     * @param int
+     * @param String
+     * @return String
+     * @see http://www.php.net/manual/ja/function.mb-strimwidth.php
+     */
+    function mbStrimwidth(str, start, width, trimmarker) {
+        if(typeof trimmarker === 'undefined') trimmarker = '';
+        var trimmakerWidth = mbStrwidth(trimmarker),i = start, l=str. length,trimmedLength = 0, trimmedStr = '';
+        for(;i<l;i++){
+            var charCode=str.charCodeAt(i),c=str.charAt(i),charWidth=mbStrwidth(c),next=str.charAt(i+1),nextWidth=mbStrwidth(next);
+            trimmedLength += charWidth;
+            trimmedStr += c;
+            if(trimmedLength+trimmakerWidth+nextWidth>width) {
+                trimmedStr += trimmarker;
+                break;
+            }
+        }
+        return trimmedStr;
+    }
