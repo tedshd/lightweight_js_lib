@@ -87,15 +87,15 @@ function setCookie(option)
 {
     var name = option.name || '',
         value = option.value || '',
-        exday = option.exday || '',
+        exdays = option.exday || '',
         domain = option.domain || '',
         path = option.path || '',
         day = '',
         expires = '';
-    if (exday) {
+    if (exdays) {
         day = new Date();
         day.setTime(day.getTime() + (exdays*24*60*60*1000));
-        expires = 'expires=' + d.toGMTString() + ';';
+        expires = 'expires=' + day.toGMTString() + ';';
     }
     if (domain) {
         domain = 'domain=' + damain + ';';
