@@ -33,12 +33,11 @@ function delElement(dom) {
     if (dom.length) {
         for (var i = 0; i < dom.length; i++) {
             dom[i].outerHTML = '';
-            delete dom[i];
         }
     } else {
         dom.outerHTML = '';
-        delete dom;
     }
+    dom = null;
 }
 
 // add class
