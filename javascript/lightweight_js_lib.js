@@ -97,7 +97,7 @@ function setCookie(option)
         expires = 'expires=' + day.toGMTString() + ';';
     }
     if (domain) {
-        domain = 'domain=' + damain + ';';
+        domain = 'domain=' + domain + ';';
     }
     if (path) {
         path = 'path=' + path + ';';
