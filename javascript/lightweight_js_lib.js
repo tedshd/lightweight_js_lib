@@ -272,3 +272,23 @@ return result;
         }
         return trimmedStr;
     }
+function thousandth(argument) {
+    if (typeof(argument) === 'number') {
+        argument = argument + '';
+    }
+    if (typeof(argument) !== 'string') {
+        console.error('argument type error');
+        return;
+    }
+    var count = 0,
+        tmp = '';
+    for (var i = argument.length - 1; i >= 0; i--) {
+        if (count === 3) {
+            tmp = ',' + tmp;
+            count = 0;
+        }
+        tmp = argument[i] + tmp;
+        count++;
+    }
+    return tmp;
+}
