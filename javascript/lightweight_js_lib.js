@@ -305,3 +305,14 @@ function thousandth(argument) {
     }
     return tmp;
 }
+
+
+function number2HEX(num) {
+    if (typeof(num) !== 'number') {
+        condole.error('input is not number');
+        return;
+    }
+    var s = num.toString(16);
+    if( (s.length % 2) > 0 ){ s = "0" + s; }
+    return s;
+}
