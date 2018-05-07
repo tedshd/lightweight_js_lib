@@ -316,3 +316,15 @@ function number2HEX(num) {
     if( (s.length % 2) > 0 ){ s = "0" + s; }
     return s;
 }
+
+function getTimeZone(date) {
+    var d;
+    if (date) {
+        d = date;
+    } else {
+        d = new Date();
+    }
+    d = d.getTimezoneOffset();
+    d = 0 - (d/60);
+    return d;
+}
