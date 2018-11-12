@@ -328,3 +328,12 @@ function getTimeZone(date) {
     d = 0 - (d/60);
     return d;
 }
+
+function orientationType() {
+    if ((window.innerHeight / window.innerWidth) > 1) {
+        return 'portrait';
+    }
+    if ((window.innerHeight / window.innerWidth) < 1) {
+        return 'landscape';
+    }
+}
