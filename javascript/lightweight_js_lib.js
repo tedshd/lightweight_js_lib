@@ -346,10 +346,12 @@ function urlMatch(url) {
     if (typeof(url) !== 'string') {
         console.error('urlMatch: url argument is not String');
     }
-    var urlObj = {};
-    var u = document.createElement('a');
+
+    var urlObj = {},
+        u = document.createElement('a');
 
     u.href = url;
+
     if (u.host === location.host) {
         return console.error('url is illegal');
     }
