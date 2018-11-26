@@ -238,53 +238,54 @@ return result;
 }
 
 /**
-     * mbStrwidth
-     * @param String
-     * @return int
-     * @see http://php.net/manual/ja/function.mb-strwidth.php
-     */
-    function mbStrwidth(str) {
-        var i=0,l=str.length,c='',length=0;
-        for(;i<l;i++){
-            c=str.charCodeAt(i);
-            if(0x0000<=c&&c<=0x0019){
-                length += 0;
-            }else if(0x0020<=c&&c<=0x1FFF){
-                length += 1;
-            }else if(0x2000<=c&&c<=0xFF60){
-                length += 2;
-            }else if(0xFF61<=c&&c<=0xFF9F){
-                length += 1;
-            }else if(0xFFA0<=c){
-                length += 2;
-            }
+ * mbStrwidth
+ * @param String
+ * @return int
+ * @see http://php.net/manual/ja/function.mb-strwidth.php
+ */
+function mbStrwidth(str) {
+    var i=0,l=str.length,c='',length=0;
+    for(;i<l;i++){
+        c=str.charCodeAt(i);
+        if(0x0000<=c&&c<=0x0019){
+            length += 0;
+        }else if(0x0020<=c&&c<=0x1FFF){
+            length += 1;
+        }else if(0x2000<=c&&c<=0xFF60){
+            length += 2;
+        }else if(0xFF61<=c&&c<=0xFF9F){
+            length += 1;
+        }else if(0xFFA0<=c){
+            length += 2;
         }
-        return length;
     }
+    return length;
+}
 
-    /**
-     * mbStrimwidth
-     * @param String
-     * @param int
-     * @param int
-     * @param String
-     * @return String
-     * @see http://www.php.net/manual/ja/function.mb-strimwidth.php
-     */
-    function mbStrimwidth(str, start, width, trimmarker) {
-        if(typeof trimmarker === 'undefined') trimmarker = '';
-        var trimmakerWidth = mbStrwidth(trimmarker),i = start, l=str. length,trimmedLength = 0, trimmedStr = '';
-        for(;i<l;i++){
-            var charCode=str.charCodeAt(i),c=str.charAt(i),charWidth=mbStrwidth(c),next=str.charAt(i+1),nextWidth=mbStrwidth(next);
-            trimmedLength += charWidth;
-            trimmedStr += c;
-            if(trimmedLength+trimmakerWidth+nextWidth>width) {
-                trimmedStr += trimmarker;
-                break;
-            }
+/**
+ * mbStrimwidth
+ * @param String
+ * @param int
+ * @param int
+ * @param String
+ * @return String
+ * @see http://www.php.net/manual/ja/function.mb-strimwidth.php
+ */
+function mbStrimwidth(str, start, width, trimmarker) {
+    if(typeof trimmarker === 'undefined') trimmarker = '';
+    var trimmakerWidth = mbStrwidth(trimmarker),i = start, l=str. length,trimmedLength = 0, trimmedStr = '';
+    for(;i<l;i++){
+        var charCode=str.charCodeAt(i),c=str.charAt(i),charWidth=mbStrwidth(c),next=str.charAt(i+1),nextWidth=mbStrwidth(next);
+        trimmedLength += charWidth;
+        trimmedStr += c;
+        if(trimmedLength+trimmakerWidth+nextWidth>width) {
+            trimmedStr += trimmarker;
+            break;
         }
-        return trimmedStr;
     }
+    return trimmedStr;
+}
+
 function thousandth(argument) {
     if (typeof(argument) === 'number') {
         argument = argument + '';
@@ -305,7 +306,6 @@ function thousandth(argument) {
     }
     return tmp;
 }
-
 
 function number2HEX(num) {
     if (typeof(num) !== 'number') {
@@ -336,4 +336,32 @@ function orientationType() {
     if ((window.innerHeight / window.innerWidth) < 1) {
         return 'landscape';
     }
+}
+
+/**
+ * [urlMatch check string is url]
+ * @param  {[String]} url [url string]
+ */
+function urlMatch(url) {
+    if (typeof(url) !== 'string') {
+        console.error('urlMatch: url argument is not String');
+    }
+    var urlObj = {};
+    var u = document.createElement('a');
+
+    u.href = url;
+    if (u.host === location.host) {
+        return console.error('url is illegal');
+    }
+
+    urlObj.href = u.href;
+    urlObj.protocol = u.protocol;
+    urlObj.host = u.host;
+    urlObj.hostname = u.hostname;
+    urlObj.port = u.port;
+    urlObj.pathname = u.pathname;
+    urlObj.search = u.search;
+    urlObj.hash = u.hash;
+    urlObj.origin = u.origin;
+    return urlObj;
 }
