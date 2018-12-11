@@ -367,3 +367,12 @@ function urlMatch(url) {
     urlObj.origin = u.origin;
     return urlObj;
 }
+
+function DateTransGMT(extime) {
+    var day = new Date();
+    var currentTimeZone = 0 - (day.getTimezoneOffset() / 60);
+    var ts = day.getTime();
+    day.setTime(ts + (extime*1000) + currentTimeZone*60*60*1000);
+    console.log(day, ts, currentTimeZone);
+    return day.toUTCString();
+}
