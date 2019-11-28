@@ -376,3 +376,44 @@ function DateTransGMT(extime) {
     console.log(day, ts, currentTimeZone);
     return day.toUTCString();
 }
+
+/**
+ * [urlUpdateQuery description]
+ * @param  {[type]} url [description]
+ * @param  {[type]} query [description]
+ * @return {[type]}     [description]
+ */
+function urlUpdateQuery (url, query) {
+    var u = '',
+        q = '',
+        obj = {};
+    if (url) {
+        u = new URL(url);
+    } else {
+        u = location;
+    }
+    if (!query) {
+        console.error('urlUpdateQuery: query is not set');
+        return;
+    }
+    if (typeof query !== 'object') {
+        console.error('urlUpdateQuery: query is not object');
+        return;
+    }
+    if (u.search) {
+        var qArray = u.search.slice(1).split('&');
+        for (var i = 0; i < qArray.length; i++) {
+            var tmp = qArray[i].split('=');
+            obj[tmp[0]] = tmp[1];
+        }
+    }
+    for (var x in query) {
+        obj[x] = query[x];
+    }
+    for (var y in obj) {
+        q = q + '&' + y + '=' + obj[y];
+    }
+    q = '?' + q.slice(1);
+    return u.protocol + '//' + u.host + u.pathname + q + u.hash;
+}
+
