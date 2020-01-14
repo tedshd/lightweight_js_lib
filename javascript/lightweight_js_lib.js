@@ -417,3 +417,14 @@ function urlUpdateQuery (url, query) {
     return u.protocol + '//' + u.host + u.pathname + q + u.hash;
 }
 
+
+/* parse form input name to JSON format object */
+function parseForm(formDom) {
+    var obj = {};
+    var el = formDom.elements;
+    for (var i = 0; i < el.length; i++) {
+        obj[el[i].name] = el[i].value;
+    }
+    return obj;
+}
+
