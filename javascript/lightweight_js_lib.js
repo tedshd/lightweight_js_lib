@@ -7,7 +7,7 @@
  */
 
 // handle get element
-function node(selector) {
+function node (selector) {
     if (selector.indexOf('.') === -1) {
         if (document.querySelectorAll(selector).length === 1) {
             return document.querySelector(selector);
@@ -18,18 +18,18 @@ function node(selector) {
 }
 
 // handle index
-function indexInParent(node) {
+function indexInParent (node) {
     var children = node.parentNode.childNodes,
         num = 0;
     for (var i = 0; i < children.length; i++) {
-         if (children[i]==node) return num;
-         if (children[i].nodeType==1) num++;
+        if (children[i] == node) return num;
+        if (children[i].nodeType == 1) num++;
     }
     return -1;
 }
 
 // handle delete element
-function delElement(dom) {
+function delElement (dom) {
     if (dom.length) {
         for (var i = 0; i < dom.length; i++) {
             dom[i].outerHTML = '';
@@ -41,7 +41,7 @@ function delElement(dom) {
 }
 
 // add class
-function addClass(dom, className) {
+function addClass (dom, className) {
     if (dom.classList) {
         dom.classList.add(className);
     } else {
@@ -50,7 +50,7 @@ function addClass(dom, className) {
 }
 
 // remove class
-function removeClass(dom, className) {
+function removeClass (dom, className) {
     if (dom.classList) {
         dom.classList.remove(className);
     } else {
@@ -60,43 +60,42 @@ function removeClass(dom, className) {
 }
 
 // has class
-function hasClass(dom, className) {
+function hasClass (dom, className) {
     if (dom.classList) {
         return dom.classList.contains(className);
     } else {
-        return (dom.className.search(className) === -1)? false: true;
+        return (dom.className.search(className) === -1) ? false : true;
     }
 }
 
 // handle time
-function toHHMMSS(sec_num) {
-    var hours   = Math.floor(sec_num / 3600),
+function toHHMMSS (sec_num) {
+    var hours = Math.floor(sec_num / 3600),
         minutes = Math.floor((sec_num - (hours * 3600)) / 60),
         seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60));
 
-    if (hours   < 10) {hours   = "0"+hours;}
-    if (minutes < 10) {minutes = "0"+minutes;}
-    if (seconds < 10) {seconds = "0"+seconds;}
-    var time    = hours+':'+minutes+':'+seconds;
+    if (hours < 10) { hours = "0" + hours; }
+    if (minutes < 10) { minutes = "0" + minutes; }
+    if (seconds < 10) { seconds = "0" + seconds; }
+    var time = hours + ':' + minutes + ':' + seconds;
     return time;
 }
 
-function timeConverter(timestamp){
-  var a = new Date(timestamp * 1000);
-  var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var hour = a.getHours();
-  var min = a.getMinutes();
-  var sec = a.getSeconds();
-  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-  return time;
+function timeConverter (timestamp) {
+    var a = new Date(timestamp * 1000);
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var year = a.getFullYear();
+    var month = months[a.getMonth()];
+    var date = a.getDate();
+    var hour = a.getHours();
+    var min = a.getMinutes();
+    var sec = a.getSeconds();
+    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
+    return time;
 }
 
 // handel cookie
-function setCookie(option)
-{
+function setCookie (option) {
     var name = option.name || '',
         value = option.value || '',
         exdays = option.exday || '',
@@ -106,7 +105,7 @@ function setCookie(option)
         expires = '';
     if (exdays) {
         day = new Date();
-        day.setTime(day.getTime() + (exdays*24*60*60*1000));
+        day.setTime(day.getTime() + (exdays * 24 * 60 * 60 * 1000));
         expires = 'expires=' + day.toGMTString() + ';';
     }
     if (domain) {
@@ -118,20 +117,18 @@ function setCookie(option)
     document.cookie = name + '=' + value + ';' + domain + path + expires;
 }
 
-function getCookie(cname)
-{
-var name = cname + "=";
-var ca = document.cookie.split(';');
-for(var i=0; i<ca.length; i++)
-  {
-  var c = ca[i].trim();
-  if (c.indexOf(name)==0) return c.substring(name.length,c.length);
-  }
-return "";
+function getCookie (cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
 }
 
 // get url query String
-function getQueryString(name) {
+function getQueryString (name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
@@ -139,7 +136,7 @@ function getQueryString(name) {
 }
 
 // check IE & version
-function isIE() {
+function isIE () {
     var myNav = navigator.userAgent.toLowerCase();
     return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
 }
@@ -157,20 +154,20 @@ for (var d = 0; d < Apple.Types.length; d++) {
 
 // delegate event
 var div = document.createElement("div"),
-    prefix = ["moz","webkit","ms","o"].filter(function(prefix){
-    return prefix+"MatchesSelector" in div;
+    prefix = ["moz", "webkit", "ms", "o"].filter(function (prefix) {
+        return prefix + "MatchesSelector" in div;
     })[0] + "MatchesSelector";
 
-Element.prototype.addDelegateListener = function(type, selector, fn) {
-    this.addEventListener(type, function(e){
+Element.prototype.addDelegateListener = function (type, selector, fn) {
+    this.addEventListener(type, function (e) {
         var target = e.target;
 
-        while(target && target !== this && !target[prefix](selector)) {
+        while (target && target !== this && !target[prefix](selector)) {
             target = target.parentNode;
         }
 
-        if(target && target !== this) {
-            return fn.call( target, e );
+        if (target && target !== this) {
+            return fn.call(target, e);
         }
 
     }, false);
@@ -178,18 +175,18 @@ Element.prototype.addDelegateListener = function(type, selector, fn) {
 
 // handle trim method
 if (!String.prototype.trim) {
-    (function() {
+    (function () {
         var rtrim = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
-        String.prototype.trim = function() {
+        String.prototype.trim = function () {
             return this.replace(rtrim, '');
         };
     })();
 }
 
 // handle console in IE7-
-(function() {
+(function () {
     var method,
-        noop = function () {},
+        noop = function () { },
         methods = [
             'assert', 'clear', 'count', 'debug', 'dir', 'dirxml', 'error',
             'exception', 'group', 'groupCollapsed', 'groupEnd', 'info', 'log',
@@ -224,17 +221,17 @@ String.prototype.halfToFull = function () {
     return temp;
 };
 
-function halfToFull(value) {
-　　　　if(value.charCodeAt(i)== 12288){
-　　　　　　result += " ";
-　　　　}else{
-　　　　　　if(value.charCodeAt(i) > 65280 && value.charCodeAt(i) < 65375){
-　　　　　　　　result += String.fromCharCode(value.charCodeAt(i) - 65248);
-　　　　　　}else{
-　　　　　　　　result += String.fromCharCode(value.charCodeAt(i));
-　　　　　　}
-　　　　}
-return result;
+function halfToFull (value) {
+    if (value.charCodeAt(i) == 12288) {
+        result += " ";
+    } else {
+        if (value.charCodeAt(i) > 65280 && value.charCodeAt(i) < 65375) {
+            result += String.fromCharCode(value.charCodeAt(i) - 65248);
+        } else {
+            result += String.fromCharCode(value.charCodeAt(i));
+        }
+    }
+    return result;
 }
 
 /**
@@ -243,19 +240,19 @@ return result;
  * @return int
  * @see http://php.net/manual/ja/function.mb-strwidth.php
  */
-function mbStrwidth(str) {
-    var i=0,l=str.length,c='',length=0;
-    for(;i<l;i++){
-        c=str.charCodeAt(i);
-        if(0x0000<=c&&c<=0x0019){
+function mbStrwidth (str) {
+    var i = 0, l = str.length, c = '', length = 0;
+    for (; i < l; i++) {
+        c = str.charCodeAt(i);
+        if (0x0000 <= c && c <= 0x0019) {
             length += 0;
-        }else if(0x0020<=c&&c<=0x1FFF){
+        } else if (0x0020 <= c && c <= 0x1FFF) {
             length += 1;
-        }else if(0x2000<=c&&c<=0xFF60){
+        } else if (0x2000 <= c && c <= 0xFF60) {
             length += 2;
-        }else if(0xFF61<=c&&c<=0xFF9F){
+        } else if (0xFF61 <= c && c <= 0xFF9F) {
             length += 1;
-        }else if(0xFFA0<=c){
+        } else if (0xFFA0 <= c) {
             length += 2;
         }
     }
@@ -271,14 +268,14 @@ function mbStrwidth(str) {
  * @return String
  * @see http://www.php.net/manual/ja/function.mb-strimwidth.php
  */
-function mbStrimwidth(str, start, width, trimmarker) {
-    if(typeof trimmarker === 'undefined') trimmarker = '';
-    var trimmakerWidth = mbStrwidth(trimmarker),i = start, l=str. length,trimmedLength = 0, trimmedStr = '';
-    for(;i<l;i++){
-        var charCode=str.charCodeAt(i),c=str.charAt(i),charWidth=mbStrwidth(c),next=str.charAt(i+1),nextWidth=mbStrwidth(next);
+function mbStrimwidth (str, start, width, trimmarker) {
+    if (typeof trimmarker === 'undefined') trimmarker = '';
+    var trimmakerWidth = mbStrwidth(trimmarker), i = start, l = str.length, trimmedLength = 0, trimmedStr = '';
+    for (; i < l; i++) {
+        var charCode = str.charCodeAt(i), c = str.charAt(i), charWidth = mbStrwidth(c), next = str.charAt(i + 1), nextWidth = mbStrwidth(next);
         trimmedLength += charWidth;
         trimmedStr += c;
-        if(trimmedLength+trimmakerWidth+nextWidth>width) {
+        if (trimmedLength + trimmakerWidth + nextWidth > width) {
             trimmedStr += trimmarker;
             break;
         }
@@ -286,11 +283,11 @@ function mbStrimwidth(str, start, width, trimmarker) {
     return trimmedStr;
 }
 
-function thousandth(argument) {
-    if (typeof(argument) === 'number') {
+function thousandth (argument) {
+    if (typeof (argument) === 'number') {
         argument = argument + '';
     }
-    if (typeof(argument) !== 'string') {
+    if (typeof (argument) !== 'string') {
         console.error('argument type error');
         return;
     }
@@ -307,17 +304,17 @@ function thousandth(argument) {
     return tmp;
 }
 
-function number2HEX(num) {
-    if (typeof(num) !== 'number') {
+function number2HEX (num) {
+    if (typeof (num) !== 'number') {
         condole.error('input is not number');
         return;
     }
     var s = num.toString(16);
-    if( (s.length % 2) > 0 ){ s = "0" + s; }
+    if ((s.length % 2) > 0) { s = "0" + s; }
     return s;
 }
 
-function getTimeZone(date) {
+function getTimeZone (date) {
     var d;
     if (date) {
         d = date;
@@ -325,11 +322,11 @@ function getTimeZone(date) {
         d = new Date();
     }
     d = d.getTimezoneOffset();
-    d = 0 - (d/60);
+    d = 0 - (d / 60);
     return d;
 }
 
-function orientationType() {
+function orientationType () {
     if ((window.innerHeight / window.innerWidth) > 1) {
         return 'portrait';
     }
@@ -342,8 +339,8 @@ function orientationType() {
  * [urlMatch check string is url]
  * @param  {[String]} url [url string]
  */
-function urlMatch(url) {
-    if (typeof(url) !== 'string') {
+function urlMatch (url) {
+    if (typeof (url) !== 'string') {
         console.error('urlMatch: url argument is not String');
     }
 
@@ -368,11 +365,11 @@ function urlMatch(url) {
     return urlObj;
 }
 
-function DateTransGMT(extime) {
+function DateTransGMT (extime) {
     var day = new Date();
     var currentTimeZone = 0 - (day.getTimezoneOffset() / 60);
     var ts = day.getTime();
-    day.setTime(ts + (extime*1000) + currentTimeZone*60*60*1000);
+    day.setTime(ts + (extime * 1000) + currentTimeZone * 60 * 60 * 1000);
     console.log(day, ts, currentTimeZone);
     return day.toUTCString();
 }
@@ -419,7 +416,7 @@ function urlUpdateQuery (url, query) {
 
 
 /* parse form input name to JSON format object */
-function parseForm(formDom) {
+function parseForm (formDom) {
     var obj = {};
     var el = formDom.elements;
     for (var i = 0; i < el.length; i++) {
@@ -429,7 +426,7 @@ function parseForm(formDom) {
 }
 
 // show time with mysql datetime format
-function mysqlDateTimeNow() {
+function mysqlDateTimeNow () {
     var now = new Date();
     return now.getFullYear() + '-' +
         (now.getMonth() + 1) + '-' +
@@ -439,3 +436,17 @@ function mysqlDateTimeNow() {
         now.getSeconds();
 }
 
+/**
+ * filter duplicate value
+ * @param {*} array
+ */
+function arrayUnique (array) {
+    var a = array.concat();
+    for (var i = 0; i < a.length; i++) {
+        for (var j = i + 1; j < a.length; j++) {
+            if (a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+    return a;
+}
