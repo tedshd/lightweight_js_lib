@@ -420,7 +420,9 @@ function parseForm (formDom) {
     var obj = {};
     var el = formDom.elements;
     for (var i = 0; i < el.length; i++) {
-        obj[el[i].name] = el[i].value;
+        if (el[i].name) {
+          obj[el[i].name] = el[i].value;
+        }
     }
     return obj;
 }
