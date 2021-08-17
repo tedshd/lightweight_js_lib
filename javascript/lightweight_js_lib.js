@@ -417,21 +417,21 @@ function urlUpdateQuery (url, query) {
 
 /* parse form input name to JSON format object */
 function parseForm (formDom) {
-  var obj = {};
-  var el = formDom.elements;
-  for (var i = 0; i < el.length; i++) {
-    if (el[i].type == 'checkbox' && !el[i].checked) {
-      obj[el[i].name] = '';
-      continue;
+    var obj = {};
+    var el = formDom.elements;
+    for (var i = 0; i < el.length; i++) {
+        if (el[i].type == 'checkbox' && !el[i].checked) {
+            obj[el[i].name] = '';
+            continue;
+        }
+        if (el[i].type == 'radio' && !el[i].checked) {
+            continue;
+        }
+        if (el[i].name) {
+            obj[el[i].name] = el[i].value.trim();
+        }
     }
-    if (el[i].type == 'radio' && !el[i].checked) {
-      continue;
-    }
-    if (el[i].name) {
-      obj[el[i].name] = el[i].value.trim();
-    }
-  }
-  return obj;
+    return obj;
 }
 
 // show time with mysql datetime format
@@ -458,4 +458,31 @@ function arrayUnique (array) {
         }
     }
     return a;
+}
+
+
+/**
+ * trans html string to text for email text format body
+ * @param {*} htmlString
+ */
+function html2textEdm (htmlString) {
+    htmlString = htmlString.replace(/<br>/gi, "\n");
+    htmlString = htmlString.replace(/<p.*>/gi, "\n");
+    var anchorRegex = /href='(.*?)'/gm;
+    var imgRegex = /src='(.*?)'/gm;
+    var tagRegex = /<(?:.|\s)*?>/g;
+    var list = htmlString.match(tagRegex);
+    htmlString = htmlString.replace(/<br>/gi, "\n").replace(/<p.*>/gi, "\n");
+    for (var i = 0; i < list.length; i++) {
+        var element = list[i];
+        var text = '';
+        if (element.search('<a') != -1) {
+            text = element.match(anchorRegex)[0].replace(anchorRegex, "[Link->$1]");
+        }
+        if (element.search('<img') != -1) {
+            text = element.match(imgRegex)[0].replace(imgRegex, "[Image->$1]");
+        }
+        htmlString = htmlString.replace(element, text + "\n");
+    }
+    return htmlString;
 }
