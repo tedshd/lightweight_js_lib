@@ -486,3 +486,41 @@ function html2textEdm (htmlString) {
     }
     return htmlString;
 }
+
+function urlParse(str) {
+  var urlArray = [];
+  var urlRegex = /((http[s]?|ftp):\/)\/?([^:\/\s]+)(?::([0-9]+))?((\/\w+)*\/)?([\w\-\.]*[^#?\s]+)?(.*)?(#[\w\-]+)?/g;
+  var arr = str.split(/[\n,' ']+/gm);
+  // var arr = str.replace(/\n/g, ' ');
+  console.log(arr);
+  for (let u = 0; u < arr.length; u++) {
+    const element = arr[u];
+    var validate = element.match(urlRegex);
+    if (validate) {
+      urlArray.push(validate[0]);
+    }
+  }
+  return urlArray;
+}
+
+function urlWhitrList(url) {
+  var list = [
+    'chat.whatsapp.com/',
+    'WA.me/',
+    'wa.me/',
+    'www.instagram.com/',
+    'youtu.be/',
+    'www.youtube.com/',
+    'www.facebook.com/',
+    'vm.tiktok.com/',
+    't.me/',
+    'twitter.com/',
+  ];
+  for (let w = 0; w < list.length; w++) {
+    const element = list[w];
+    if (url.indexOf(element) !== -1) {
+      return true;
+    }
+  }
+  return false;
+}
