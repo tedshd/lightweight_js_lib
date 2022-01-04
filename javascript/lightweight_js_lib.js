@@ -487,9 +487,13 @@ function html2textEdm (htmlString) {
     return htmlString;
 }
 
+/**
+* Refer
+* https://gist.github.com/metafeather/202974/34c2d31bd82f59c2486f38790054bbbc0b10ca8b
+*/
 function urlParse(str) {
   var urlArray = [];
-  var urlRegex = /((http[s]?|ftp):\/)\/?([^:\/\s]+)(?::([0-9]+))?((\/\w+)*\/)?([\w\-\.]*[^#?\s]+)?(.*)?(#[\w\-]+)?/g;
+  var urlRegex = /((http[s]?|ftp):\/)\/?([^:\/\s]+)(?::([0-9]+))?((\/\w+)*\/)?([\w\-\.]*)?([#?\w]+)?([\w\+\-\/\%]*)?[A-Za-z0-9_\/]/g;
   var arr = str.split(/[\n,' ']+/gm);
   // var arr = str.replace(/\n/g, ' ');
   console.log(arr);
