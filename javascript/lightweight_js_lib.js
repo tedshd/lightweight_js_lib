@@ -493,7 +493,7 @@ function html2textEdm (htmlString) {
 */
 function urlParse(str) {
   var urlArray = [];
-  var urlRegex = /((http[s]?|ftp):\/)\/?([^:\/\s]+)(?::([0-9]+))?((\/\w+)*\/)?([\w\-\.]*)?([#?\w]+)?([\w\+\-\/\%]*)?[A-Za-z0-9_\/]/g;
+  var urlRegex = /((http[s]?|ftp):\/)\/?([^:\/\s]+)(?::([0-9]+))?((\/\w+)*\/)?([\w\-\.]*)?([#?\w\=]+)?([\&\w=\w]+.*)?([\w\+\-\/\%]*)?[A-Za-z0-9_\/]/g;
   var arr = str.split(/[\n,' ']+/gm);
   // var arr = str.replace(/\n/g, ' ');
   console.log(arr);
