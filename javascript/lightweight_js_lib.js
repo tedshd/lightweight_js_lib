@@ -528,3 +528,22 @@ function urlWhitrList(url) {
   }
   return false;
 }
+
+/**
+* emoji start with 0x1f600
+* https://unicode.org/emoji/charts/full-emoji-list.html
+* parseInt('1f600', 16)
+*/
+function checkEmoji(s) {
+  let hexCode = s.charCodeAt();
+  let dec = parseInt(hexCode, 16);
+  if (isNaN(hexCode)) {
+    console.error('checkEmoji: input empty')
+    return;
+  }
+  if (dec < 128512) {
+    return false;
+  } else {
+    return true;
+  }
+}
