@@ -541,7 +541,7 @@ function checkEmoji(s) {
     console.error('checkEmoji: input empty')
     return;
   }
-  if (dec < 128512) {
+  if (dec < 349015) {
     return false;
   } else {
     return true;
