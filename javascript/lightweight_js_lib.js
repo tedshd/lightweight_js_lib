@@ -547,3 +547,16 @@ function checkEmoji(s) {
     return true;
   }
 }
+
+function randomArray(length, randomCount) {
+  let newArray = []
+
+  while (newArray.length < length) {
+    let rand = Math.floor(Math.random() * randomCount)
+    if (newArray.includes(rand)) {
+      continue
+    }
+    newArray.push(rand)
+  }
+  return newArray
+}
