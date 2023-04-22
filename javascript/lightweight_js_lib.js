@@ -417,21 +417,26 @@ function urlUpdateQuery (url, query) {
 
 /* parse form input name to JSON format object */
 function parseForm (formDom) {
-    var obj = {};
-    var el = formDom.elements;
-    for (var i = 0; i < el.length; i++) {
-        if (el[i].type == 'checkbox' && !el[i].checked) {
-            obj[el[i].name] = '';
-            continue;
-        }
-        if (el[i].type == 'radio' && !el[i].checked) {
-            continue;
-        }
-        if (el[i].name) {
-            obj[el[i].name] = el[i].value.trim();
-        }
+  var obj = {};
+  var el = formDom.elements;
+  for (var i = 0; i < el.length; i++) {
+    if (el[i].type == 'checkbox') {
+      if (!obj[el[i].name]) {
+        obj[el[i].name] = [];
+      }
+      if (el[i].checked) {
+        obj[el[i].name].push(el[i].value.trim());
+      }
+      continue;
     }
-    return obj;
+    if (el[i].type == 'radio' && !el[i].checked) {
+      continue;
+    }
+    if (el[i].name) {
+      obj[el[i].name] = el[i].value.trim();
+    }
+  }
+  return obj;
 }
 
 // show time with mysql datetime format
