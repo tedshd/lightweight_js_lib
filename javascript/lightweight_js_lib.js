@@ -94,6 +94,26 @@ function timeConverter (timestamp) {
     return time;
 }
 
+function date2LocalString (date) {
+
+// request a weekday along with a long date
+const options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric"
+};
+console.log(date.toLocaleDateString("de-DE", options));
+// "Donnerstag, 20. Dezember 2012"
+
+// an application may want to use UTC and make that visible
+options.timeZoneName = "short";
+console.log(date.toLocaleDateString("zh-TW", options));
+}
+
 // handel cookie
 function setCookie (option) {
     var name = option.name || '',
