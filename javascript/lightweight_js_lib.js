@@ -7,7 +7,7 @@
  */
 
 // handle get element
-function node (selector) {
+function node(selector) {
     if (selector.indexOf('.') === -1) {
         if (document.querySelectorAll(selector).length === 1) {
             return document.querySelector(selector);
@@ -18,7 +18,7 @@ function node (selector) {
 }
 
 // handle index
-function indexInParent (node) {
+function indexInParent(node) {
     var children = node.parentNode.childNodes,
         num = 0;
     for (var i = 0; i < children.length; i++) {
@@ -29,7 +29,7 @@ function indexInParent (node) {
 }
 
 // handle delete element
-function delElement (dom) {
+function delElement(dom) {
     if (dom.length) {
         for (var i = 0; i < dom.length; i++) {
             dom[i].outerHTML = '';
@@ -41,7 +41,7 @@ function delElement (dom) {
 }
 
 // add class
-function addClass (dom, className) {
+function addClass(dom, className) {
     if (dom.classList) {
         dom.classList.add(className);
     } else {
@@ -50,7 +50,7 @@ function addClass (dom, className) {
 }
 
 // remove class
-function removeClass (dom, className) {
+function removeClass(dom, className) {
     if (dom.classList) {
         dom.classList.remove(className);
     } else {
@@ -60,7 +60,7 @@ function removeClass (dom, className) {
 }
 
 // has class
-function hasClass (dom, className) {
+function hasClass(dom, className) {
     if (dom.classList) {
         return dom.classList.contains(className);
     } else {
@@ -69,7 +69,7 @@ function hasClass (dom, className) {
 }
 
 // handle time
-function toHHMMSS (sec_num) {
+function toHHMMSS(sec_num) {
     var hours = Math.floor(sec_num / 3600),
         minutes = Math.floor((sec_num - (hours * 3600)) / 60),
         seconds = Math.floor(sec_num - (hours * 3600) - (minutes * 60));
@@ -81,7 +81,7 @@ function toHHMMSS (sec_num) {
     return time;
 }
 
-function timeConverter (timestamp) {
+function timeConverter(timestamp) {
     var a = new Date(timestamp * 1000);
     var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var year = a.getFullYear();
@@ -94,28 +94,38 @@ function timeConverter (timestamp) {
     return time;
 }
 
-function date2LocalString (date) {
+function date2LocalString(date, type) {
 
-// request a weekday along with a long date
-const options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  second: "numeric"
-};
-console.log(date.toLocaleDateString("de-DE", options));
-// "Donnerstag, 20. Dezember 2012"
+    const options = {
+        dateString: {
+            weekday: "short",
+            month: "numeric",
+            day: "numeric"
+        },
+        dateQuery: {
+            month: "numeric",
+            day: "numeric",
+            year: "numeric"
+        },
+        dateTime: {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            second: "numeric"
+        }
+    }
+    // console.log(date.toLocaleDateString("de-DE", options));
+    // "Donnerstag, 20. Dezember 2012"
 
-// an application may want to use UTC and make that visible
-options.timeZoneName = "short";
-console.log(date.toLocaleDateString("zh-TW", options));
+    // an application may want to use UTC and make that visible
+    options.timeZoneName = "short";
+    console.log(date.toLocaleDateString("en", options[type]));
 }
 
 // handel cookie
-function setCookie (option) {
+function setCookie(option) {
     var name = option.name || '',
         value = option.value || '',
         exdays = option.exday || '',
@@ -137,7 +147,7 @@ function setCookie (option) {
     document.cookie = name + '=' + value + ';' + domain + path + expires;
 }
 
-function getCookie (cname) {
+function getCookie(cname) {
     var name = cname + "=";
     var ca = document.cookie.split(';');
     for (var i = 0; i < ca.length; i++) {
@@ -148,7 +158,7 @@ function getCookie (cname) {
 }
 
 // get url query String
-function getQueryString (name) {
+function getQueryString(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
         results = regex.exec(location.search);
@@ -156,7 +166,7 @@ function getQueryString (name) {
 }
 
 // check IE & version
-function isIE () {
+function isIE() {
     var myNav = navigator.userAgent.toLowerCase();
     return (myNav.indexOf('msie') != -1) ? parseInt(myNav.split('msie')[1]) : false;
 }
@@ -241,7 +251,7 @@ String.prototype.halfToFull = function () {
     return temp;
 };
 
-function halfToFull (value) {
+function halfToFull(value) {
     if (value.charCodeAt(i) == 12288) {
         result += " ";
     } else {
@@ -260,7 +270,7 @@ function halfToFull (value) {
  * @return int
  * @see http://php.net/manual/ja/function.mb-strwidth.php
  */
-function mbStrwidth (str) {
+function mbStrwidth(str) {
     var i = 0, l = str.length, c = '', length = 0;
     for (; i < l; i++) {
         c = str.charCodeAt(i);
@@ -288,7 +298,7 @@ function mbStrwidth (str) {
  * @return String
  * @see http://www.php.net/manual/ja/function.mb-strimwidth.php
  */
-function mbStrimwidth (str, start, width, trimmarker) {
+function mbStrimwidth(str, start, width, trimmarker) {
     if (typeof trimmarker === 'undefined') trimmarker = '';
     var trimmakerWidth = mbStrwidth(trimmarker), i = start, l = str.length, trimmedLength = 0, trimmedStr = '';
     for (; i < l; i++) {
@@ -303,7 +313,7 @@ function mbStrimwidth (str, start, width, trimmarker) {
     return trimmedStr;
 }
 
-function thousandth (argument) {
+function thousandth(argument) {
     if (typeof (argument) === 'number') {
         argument = argument + '';
     }
@@ -324,7 +334,7 @@ function thousandth (argument) {
     return tmp;
 }
 
-function number2HEX (num) {
+function number2HEX(num) {
     if (typeof (num) !== 'number') {
         condole.error('input is not number');
         return;
@@ -334,7 +344,7 @@ function number2HEX (num) {
     return s;
 }
 
-function getTimeZone (date) {
+function getTimeZone(date) {
     var d;
     if (date) {
         d = date;
@@ -346,7 +356,7 @@ function getTimeZone (date) {
     return d;
 }
 
-function orientationType () {
+function orientationType() {
     if ((window.innerHeight / window.innerWidth) > 1) {
         return 'portrait';
     }
@@ -359,7 +369,7 @@ function orientationType () {
  * [urlMatch check string is url]
  * @param  {[String]} url [url string]
  */
-function urlMatch (url) {
+function urlMatch(url) {
     if (typeof (url) !== 'string') {
         console.error('urlMatch: url argument is not String');
     }
@@ -385,7 +395,7 @@ function urlMatch (url) {
     return urlObj;
 }
 
-function DateTransGMT (extime) {
+function DateTransGMT(extime) {
     var day = new Date();
     var currentTimeZone = 0 - (day.getTimezoneOffset() / 60);
     var ts = day.getTime();
@@ -400,7 +410,7 @@ function DateTransGMT (extime) {
  * @param  {[type]} query [description]
  * @return {[type]}     [description]
  */
-function urlUpdateQuery (url, query) {
+function urlUpdateQuery(url, query) {
     var u = '',
         q = '',
         obj = {};
@@ -436,31 +446,31 @@ function urlUpdateQuery (url, query) {
 
 
 /* parse form input name to JSON format object */
-function parseForm (formDom) {
-  var obj = {};
-  var el = formDom.elements;
-  for (var i = 0; i < el.length; i++) {
-    if (el[i].type == 'checkbox') {
-      if (!obj[el[i].name]) {
-        obj[el[i].name] = [];
-      }
-      if (el[i].checked) {
-        obj[el[i].name].push(el[i].value.trim());
-      }
-      continue;
+function parseForm(formDom) {
+    var obj = {};
+    var el = formDom.elements;
+    for (var i = 0; i < el.length; i++) {
+        if (el[i].type == 'checkbox') {
+            if (!obj[el[i].name]) {
+                obj[el[i].name] = [];
+            }
+            if (el[i].checked) {
+                obj[el[i].name].push(el[i].value.trim());
+            }
+            continue;
+        }
+        if (el[i].type == 'radio' && !el[i].checked) {
+            continue;
+        }
+        if (el[i].name) {
+            obj[el[i].name] = el[i].value.trim();
+        }
     }
-    if (el[i].type == 'radio' && !el[i].checked) {
-      continue;
-    }
-    if (el[i].name) {
-      obj[el[i].name] = el[i].value.trim();
-    }
-  }
-  return obj;
+    return obj;
 }
 
 // show time with mysql datetime format
-function mysqlDateTimeNow () {
+function mysqlDateTimeNow() {
     var now = new Date();
     return now.getFullYear() + '-' +
         (now.getMonth() + 1) + '-' +
@@ -474,7 +484,7 @@ function mysqlDateTimeNow () {
  * filter duplicate value
  * @param {*} array
  */
-function arrayUnique (array) {
+function arrayUnique(array) {
     var a = array.concat();
     for (var i = 0; i < a.length; i++) {
         for (var j = i + 1; j < a.length; j++) {
@@ -490,7 +500,7 @@ function arrayUnique (array) {
  * trans html string to text for email text format body
  * @param {*} htmlString
  */
-function html2textEdm (htmlString) {
+function html2textEdm(htmlString) {
     htmlString = htmlString.replace(/<br>/gi, "\n");
     htmlString = htmlString.replace(/<p.*>/gi, "\n");
     var anchorRegex = /href='(.*?)'/gm;
@@ -517,41 +527,41 @@ function html2textEdm (htmlString) {
 * https://gist.github.com/metafeather/202974/34c2d31bd82f59c2486f38790054bbbc0b10ca8b
 */
 function urlParse(str) {
-  var urlArray = [];
-  var urlRegex = /((http[s]?|ftp):\/)\/?([^:\/\s]+)(?::([0-9]+))?((\/\w+)*\/)?([\w\-\.]*)?([#?\w\=]+)?([\&\w=\w]+.*)?([\w\+\-\/\%]*)?[A-Za-z0-9_\/]/g;
-  var arr = str.split(/[\n,' ']+/gm);
-  // var arr = str.replace(/\n/g, ' ');
-  console.log(arr);
-  for (let u = 0; u < arr.length; u++) {
-    const element = arr[u];
-    var validate = element.match(urlRegex);
-    if (validate) {
-      urlArray.push(validate[0]);
+    var urlArray = [];
+    var urlRegex = /((http[s]?|ftp):\/)\/?([^:\/\s]+)(?::([0-9]+))?((\/\w+)*\/)?([\w\-\.]*)?([#?\w\=]+)?([\&\w=\w]+.*)?([\w\+\-\/\%]*)?[A-Za-z0-9_\/]/g;
+    var arr = str.split(/[\n,' ']+/gm);
+    // var arr = str.replace(/\n/g, ' ');
+    console.log(arr);
+    for (let u = 0; u < arr.length; u++) {
+        const element = arr[u];
+        var validate = element.match(urlRegex);
+        if (validate) {
+            urlArray.push(validate[0]);
+        }
     }
-  }
-  return urlArray;
+    return urlArray;
 }
 
 function urlWhitrList(url) {
-  var list = [
-    'chat.whatsapp.com/',
-    'WA.me/',
-    'wa.me/',
-    'www.instagram.com/',
-    'youtu.be/',
-    'www.youtube.com/',
-    'www.facebook.com/',
-    'vm.tiktok.com/',
-    't.me/',
-    'twitter.com/',
-  ];
-  for (let w = 0; w < list.length; w++) {
-    const element = list[w];
-    if (url.indexOf(element) !== -1) {
-      return true;
+    var list = [
+        'chat.whatsapp.com/',
+        'WA.me/',
+        'wa.me/',
+        'www.instagram.com/',
+        'youtu.be/',
+        'www.youtube.com/',
+        'www.facebook.com/',
+        'vm.tiktok.com/',
+        't.me/',
+        'twitter.com/',
+    ];
+    for (let w = 0; w < list.length; w++) {
+        const element = list[w];
+        if (url.indexOf(element) !== -1) {
+            return true;
+        }
     }
-  }
-  return false;
+    return false;
 }
 
 /**
@@ -560,37 +570,37 @@ function urlWhitrList(url) {
 * parseInt('1f600', 16)
 */
 function checkEmoji(s) {
-  let hexCode = s.charCodeAt();
-  let dec = parseInt(hexCode, 16);
-  if (isNaN(hexCode)) {
-    console.error('checkEmoji: input empty')
-    return;
-  }
-  if (dec < 349015) {
-    return false;
-  } else {
-    return true;
-  }
+    let hexCode = s.charCodeAt();
+    let dec = parseInt(hexCode, 16);
+    if (isNaN(hexCode)) {
+        console.error('checkEmoji: input empty')
+        return;
+    }
+    if (dec < 349015) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 function randomArray(length, randomCount) {
-  let newArray = []
+    let newArray = []
 
-  while (newArray.length < length) {
-    let rand = Math.floor(Math.random() * randomCount)
-    if (newArray.includes(rand)) {
-      continue
+    while (newArray.length < length) {
+        let rand = Math.floor(Math.random() * randomCount)
+        if (newArray.includes(rand)) {
+            continue
+        }
+        newArray.push(rand)
     }
-    newArray.push(rand)
-  }
-  return newArray
+    return newArray
 }
 
-function IsRTL (s) {
-  // const weakChars = '\u0000-\u0040\u005B-\u0060\u007B-\u00BF\u00D7\u00F7\u02B9-\u02FF\u2000-\u2BFF\u2010-\u2029\u202C\u202F-\u2BFF'
-  const rtlChars = '\u0591-\u07FF\u200F\u202B\u202E\uFB1D-\uFDFD\uFE70-\uFEFC'
-  // const rtlDirCheck = new RegExp('^[' + weakChars + ']*[' + rtlChars + ']')
-  const rtlDirCheck = new RegExp('[' + rtlChars + ']')
+function IsRTL(s) {
+    // const weakChars = '\u0000-\u0040\u005B-\u0060\u007B-\u00BF\u00D7\u00F7\u02B9-\u02FF\u2000-\u2BFF\u2010-\u2029\u202C\u202F-\u2BFF'
+    const rtlChars = '\u0591-\u07FF\u200F\u202B\u202E\uFB1D-\uFDFD\uFE70-\uFEFC'
+    // const rtlDirCheck = new RegExp('^[' + weakChars + ']*[' + rtlChars + ']')
+    const rtlDirCheck = new RegExp('[' + rtlChars + ']')
 
-  return rtlDirCheck.test(s)
+    return rtlDirCheck.test(s)
 }
