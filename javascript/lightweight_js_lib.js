@@ -604,3 +604,26 @@ function IsRTL(s) {
 
     return rtlDirCheck.test(s)
 }
+
+function osVersion() {
+    let version = '';
+
+    const android = (navigator.userAgent).match(/Android\s+([\d\\.]+)/i);
+    if (android) {
+        version = android[0]
+    }
+    const ios = (navigator.userAgent).match(/OS\s+([\d\\_]+)/i);
+    if (ios) {
+        version = ios[0].replace('OS ', 'iOS')
+    }
+    const win = navigator.userAgent.match(/Windows NT (\d+\.\d+)/);
+    if (win) {
+        version = win[0]
+    }
+
+    if (!version) {
+        version = navigator.platform
+    }
+
+    return version ? version : navigator.platform;
+}
