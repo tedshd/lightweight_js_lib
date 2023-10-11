@@ -625,5 +625,5 @@ function osVersion() {
         version = navigator.platform
     }
 
-    return version ? version : navigator.platform;
+    return version;
 }
