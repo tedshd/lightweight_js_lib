@@ -627,3 +627,7 @@ function osVersion() {
 
     return version;
 }
+
+function ln2brFilterLast(str) {
+    return str.replace(/\n$/, "").replace(/\n/g, "<br>")
+}
