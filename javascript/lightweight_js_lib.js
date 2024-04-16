@@ -542,7 +542,7 @@ function urlParse(str) {
     return urlArray;
 }
 
-function urlWhitrList(url) {
+function urlWhiteList(url) {
     var list = [
         'chat.whatsapp.com/',
         'WA.me/',
@@ -628,6 +628,11 @@ function osVersion() {
     return version;
 }
 
+/**
+ * [ln2brFilter description]
+ * @param  {[String]} str [description]
+ * @return {[String]}     [description]
+ */
 function ln2brFilterLast(str) {
     return str.replace(/\n$/, "").replace(/\n/g, "<br>")
 }
