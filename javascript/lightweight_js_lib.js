@@ -120,7 +120,7 @@ function timeConverter(timestamp) {
 /**
  *
  * @param {*} date date time string or timestamp
- * @param {*} type string
+ * @param {*} type string dateString, dateQuery, dateTime, dig, iso
  * @returns
  */
 function date2LocalString(date, type) {
@@ -162,6 +162,8 @@ function date2LocalString(date, type) {
     return new Date(date).toLocaleDateString("sv", options[type]);
     // YYYY-MM-DD HH:MM:SS
     // refer https://blog.darkthread.net/blog/js-date-yyyymmdd-hhmmss/
+  } else if (type === "iso") {
+    return new Date(date).toISOString();
   } else {
     return new Date(date).toLocaleDateString("en", options[type]);
   }
