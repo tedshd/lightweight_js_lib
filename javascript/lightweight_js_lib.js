@@ -148,7 +148,7 @@ function date2LocalString(date, type) {
       second: "numeric",
     },
     dig: {
-      hourCycle: "h24",
+      hourCycle: "h23",
       year: "numeric",
       month: "2-digit",
       day: "2-digit",
