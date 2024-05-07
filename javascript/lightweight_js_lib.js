@@ -724,3 +724,45 @@ function osVersion() {
 function ln2brFilterLast(str) {
   return str.replace(/\n$/, "").replace(/\n/g, "<br>");
 }
+
+/**
+ *
+ * @param {*} time number
+ * @param {*} doSomething function
+ * @returns object {init: function, end: function}
+ * @example
+ * const timer = countdownTimer(5, () => {
+ *  console.log("計時器完成！");
+ * }
+ * timer.init();
+ * console.log(timer.end());
+ * setInterval(() => {
+ * console.log(timer.end());
+ * }
+ */
+function countdownTimer(time, doSomething) {
+  let end = false;
+  const init = () => {
+    const endTime = new Date().getTime() + time * 1000;
+    const timer = setInterval(function() {
+      const currentTime = new Date().getTime();
+      const remainingTime = endTime - currentTime;
+      if (remainingTime <= 0) {
+        clearInterval(timer);
+        end = true;
+        if (doSomething) {
+          doSomething();
+        }
+      }
+    }, 300);
+  };
+
+  const getStatus = () => {
+    return end;
+  };
+
+  return {
+    init: init,
+    end: getStatus,
+  };
+}
