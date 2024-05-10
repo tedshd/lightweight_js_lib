@@ -733,12 +733,12 @@ function ln2brFilterLast(str) {
  * @example
  * const timer = countdownTimer(5, () => {
  *  console.log("計時器完成！");
- * }
+ * });
  * timer.init();
  * console.log(timer.end());
  * setInterval(() => {
- * console.log(timer.end());
- * }
+ *   console.log(timer.end());
+ * }, 1000)
  */
 function countdownTimer(time, doSomething) {
   let end = false;
@@ -754,7 +754,7 @@ function countdownTimer(time, doSomething) {
           doSomething();
         }
       }
-    }, 300);
+    }, 500);
   };
 
   const getStatus = () => {
