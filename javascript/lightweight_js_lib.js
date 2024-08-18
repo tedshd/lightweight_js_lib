@@ -740,12 +740,13 @@ function ln2brFilterLast(str) {
  *   console.log(timer.end());
  * }, 1000)
  */
-function countdownTimer(time, doSomething) {
+const countdownTimer = (time, doSomething) => {
   let end = false;
   let timer;
+  let endTime;
   const init = () => {
-    const endTime = new Date().getTime() + time * 1000;
-    timer = setInterval(function() {
+    endTime = new Date().getTime() + time * 1000;
+    timer = setInterval(function () {
       const currentTime = new Date().getTime();
       const remainingTime = endTime - currentTime;
       if (remainingTime <= 0) {
@@ -755,12 +756,18 @@ function countdownTimer(time, doSomething) {
           doSomething();
         }
       }
-    }, 500);
+    }, 300);
   };
 
   const clear = () => {
     clearInterval(timer);
     end = true;
+    return (endTime - new Date().getTime()) / 1000;
+  };
+
+  const pause = () => {
+    clearInterval(timer);
+    return (endTime - new Date().getTime()) / 1000;
   };
 
   const getStatus = () => {
@@ -768,8 +775,9 @@ function countdownTimer(time, doSomething) {
   };
 
   return {
+    pause: pause,
     clear: clear,
     init: init,
     end: getStatus,
   };
-}
+};

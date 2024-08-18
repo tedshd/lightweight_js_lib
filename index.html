@@ -28,6 +28,8 @@
     <div class="dom">O</div>
     <div class="dom">M</div>
     <div class="dom">!</div>
+    <button id="pause">countdown pause</button>
+    <button id="play">countdown play</button>
 </body>
 <script src="javascript/lightweight_js_lib.js"></script>
 <script>
@@ -49,5 +51,40 @@
     removeClass(node('a .test')[0], 'test');
     removeClass(node('span')[2], 'test');
     setCookie({name: 'test', value: 34});
+
+
+    const timer = countdownTimer(5, () => {
+    console.log("計時器完成！");
+    });
+    timer.init();
+    console.log(timer.end());
+    setInterval(() => {
+    console.log(timer.end());
+    }, 1000)
+    setTimeout(() => {
+    timer.clear();
+    }, 3000);
+    setTimeout(() => {
+    timer.clear();
+    }, 4000);
+
+    let time = 10;
+    let timer2;
+    timer2 = countdownTimer(time, () => {
+        console.log("計時器完成！");
+    });
+    timer2.init();
+    document.querySelector('#pause').addEventListener('click', () => {
+        console.log("計時器暫停！");
+        time = Math.floor(timer2.pause());
+    });
+    document.querySelector('#play').addEventListener('click', () => {
+        console.log("計時器開始！");
+        console.log(time);
+        timer2 = countdownTimer(time, () => {
+            console.log("計時器完成！play");
+        });
+        timer2.init();
+    });
 </script>
 </html>
