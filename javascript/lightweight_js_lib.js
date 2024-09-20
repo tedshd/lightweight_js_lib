@@ -781,3 +781,30 @@ const countdownTimer = (time, doSomething) => {
     end: getStatus,
   };
 };
+
+/**
+* base64Image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...'; // 替換為你的 Base64 字符串
+* fileName = 'name1';
+*/
+function base64ToFile(base64String, fileName) {
+  // 拆分 Base64 字符串，獲取 MIME 類型
+  const [header, base64] = base64String.split(',');
+  const mimeType = header.match(/:(.*?);/)[1];
+  const filenameExtension = mimeType.split('/')[1];
+
+  // 將 Base64 字符串轉換為二進制數據
+  const byteCharacters = atob(base64);
+  const byteNumbers = new Uint8Array(byteCharacters.length);
+
+  for (let i = 0; i < byteCharacters.length; i++) {
+    byteNumbers[i] = byteCharacters.charCodeAt(i);
+  }
+
+  // 創建 Blob 對象
+  const blob = new Blob([byteNumbers], { type: mimeType });
+
+  // 將 Blob 轉換為 File 對象
+  const file = new File([blob], `${fileName}.${filenameExtension}`, { type: mimeType });
+
+  return file;
+}
